@@ -4,23 +4,41 @@ import { UpdateUserDto } from './dto/update-user.dto';
 
 @Injectable()
 export class UsersService {
-  create(createUserDto: CreateUserDto) {
-    return 'This action adds a new user';
+  constructor(
+    @InjectRepository(User) private readonly userRepository: Repository<User>,
+  ) {}
+
+  createUser(createUserDto:CreateUserDto):Promise<User> {
+    const user: User = new User();
+    user.name = createUserDto.name;
+    user.age = createUserDto.age;
+    user.email = createUserDto.email;
+    user.username = createUserDto.username;
+    user.password = createUserDto.password;
+    user.gender = createUserDto.gender;
+    return this.userRepository.save(user);
   }
 
-  findAll() {
-    return `This action returns all users`;
+  findAllUser():Promise<User[]> {
+      return this.userRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
+  viewUser(id: number): Promise<User>{
+    return this.userRepository.findOneBy({ id });
   }
 
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
+  updateUser(id: number, updateUserDto:UpdateUserDto): Promise<User>{
+    const user:User = new User();
+    user.name = updateUserDto.name;
+    user.age = updateUserDto.age;
+    user.email = updateUserDto.email;
+    user.username = updateUserDto.username;
+    user.password = updateUserDto.password;
+    user.id = id;
+    return this.userRepository.save(user);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} user`;
+  remove(id: number): Promise<{ affected?: number }>{
+    return this.userRepository.delete(id);
   }
 }
