@@ -38,7 +38,7 @@ export class UsersService {
     return this.userRepository.save(user);
   }
 
-  remove(id: number): Promise<{ affected?: number }>{
+  removeUser(id: number): Promise<{ affected?: number }>{
     return this.userRepository.delete(id);
   }
 }
