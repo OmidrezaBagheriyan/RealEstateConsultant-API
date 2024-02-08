@@ -1,34 +1,48 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { UsersService } from './users.service';
+import { InjectRepository } from '@nestjs/typeorm';
+import { User } from './entities/user.entity';
+import { Repository } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 
 @Controller('users')
 export class UsersController {
-  constructor(private readonly usersService: UsersService) {}
+  constructor(
+    @InjectRepository(User) private readonly userRepository: Repository<User>,
+  ) {}
 
-  @Post()
-  create(@Body() createUserDto: CreateUserDto) {
-    return this.usersService.create(createUserDto);
+  createUser(createUserDto:CreateUserDto):Promise<User> {
+    const user: User = new User();
+    user.name = createUserDto.name;
+    user.age = createUserDto.age;
+    user.email = createUserDto.email;
+    user.username = createUserDto.username;
+    user.password = createUserDto.password;
+    user.gender = createUserDto.gender;
+    return this.userRepository.save(user);
   }
 
-  @Get()
-  findAll() {
-    return this.usersService.findAll();
+  findAllUser():Promise<User[]> {
+      return this.userRepository.find();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.usersService.findOne(+id);
+  viewUser(id: number): Promise<User>{
+    return this.userRepository.findOneBy({ id });
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
-    return this.usersService.update(+id, updateUserDto);
+  updateUser(id: number, updateUserDto:UpdateUserDto): Promise<User>{
+    const user:User = new User();
+    user.name = updateUserDto.name;
+    user.age = updateUserDto.age;
+    user.email = updateUserDto.email;
+    user.username = updateUserDto.username;
+    user.password = updateUserDto.password;
+    user.id = id;
+    return this.userRepository.save(user);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.usersService.remove(+id);
+  remove(id: number): Promise<{ affected?: number }>{
+    return this.userRepository.delete(id);
   }
 }
