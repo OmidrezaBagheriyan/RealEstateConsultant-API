@@ -5,6 +5,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsersModule } from './users/users.module';
 import { User } from './users/entities/user.entity';
 import { SalesModule } from './sales/sales.module';
+import { Sale } from './sales/entities/sale.entity';
 
 @Module({
   imports: [
@@ -14,7 +15,7 @@ import { SalesModule } from './sales/sales.module';
       port: 5432,
       password: 'sara',
       username: 'postgres',
-      entities: [User],
+      entities: [User, Sale],
       database: 'realEstateConsultantDB',
       synchronize: true,
       logging: true
