@@ -11,14 +11,14 @@ export class Sale {
     @Column({ type: 'int'})
     price: number;
 
-    @Column({ type: 'float'})
+    @Column({ type: 'int'})
     meter: number;
 
     @Column({ type: 'int'})
     price_per_meter: number;
 
     @Column({ type: 'int'})
-    number_of_rooms:number;
+    number_of_rooms: number;
 
     @Column({ type: 'int'})
     floor: number;
