@@ -6,6 +6,7 @@ import { UsersModule } from './users/users.module';
 import { User } from './users/entities/user.entity';
 import { SalesModule } from './sales/sales.module';
 import { Sale } from './sales/entities/sale.entity';
+import { RentsModule } from './rents/rents.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { Sale } from './sales/entities/sale.entity';
     }),
     UsersModule,
     SalesModule,
+    RentsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
