@@ -9,26 +9,26 @@ export class RentsController {
 
   @Post()
   create(@Body() createRentDto: CreateRentDto) {
-    return this.rentsService.create(createRentDto);
+    return this.rentsService.createRent(createRentDto);
   }
 
   @Get()
   findAll() {
-    return this.rentsService.findAll();
+    return this.rentsService.findAllRent();
   }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.rentsService.findOne(+id);
+    return this.rentsService.viewRent(+id);
   }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateRentDto: UpdateRentDto) {
-    return this.rentsService.update(+id, updateRentDto);
+    return this.rentsService.updateRent(+id, updateRentDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.rentsService.remove(+id);
+    return this.rentsService.removeRent(+id);
   }
 }
