@@ -7,6 +7,7 @@ import { User } from './users/entities/user.entity';
 import { SalesModule } from './sales/sales.module';
 import { Sale } from './sales/entities/sale.entity';
 import { RentsModule } from './rents/rents.module';
+import { Rent } from './rents/entities/rent.entity';
 
 @Module({
   imports: [
@@ -16,7 +17,7 @@ import { RentsModule } from './rents/rents.module';
       port: 5432,
       password: 'sara',
       username: 'postgres',
-      entities: [User, Sale],
+      entities: [User, Sale, Rent],
       database: 'realEstateConsultantDB',
       synchronize: true,
       logging: true

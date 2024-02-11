@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { User } from "src/users/entities/user.entity";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Sale {
@@ -31,4 +32,7 @@ export class Sale {
 
     @Column({ type: 'varchar', length: 512 })
     description: string;
+
+    @OneToMany(type=> User, user => user.rents)
+    user:User;
 }

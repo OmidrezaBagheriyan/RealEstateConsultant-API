@@ -1,4 +1,6 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Rent } from "src/rents/entities/rent.entity";
+import { Sale } from "src/sales/entities/sale.entity";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class User {
@@ -22,4 +24,11 @@ export class User {
 
     @Column({ type: 'enum', enum: ['male','female','unspecified']})
     gender: string;
+
+    @OneToMany(type=> Rent, rent=> rent.user)
+    rents:Rent[]
+
+    @OneToMany(type=> Sale, sale=> sale.user)
+    sales:Sale[]
+
 }
