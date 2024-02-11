@@ -25,7 +25,7 @@ export class RentsService {
     return this.rentRepository.save(rent)
   }
 
-  findAllSale():Promise<Rent[]>{
+  findAllRent():Promise<Rent[]>{
     return this.rentRepository.find();
   }
 
