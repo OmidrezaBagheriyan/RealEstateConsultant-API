@@ -36,7 +36,7 @@ export class CreateUserDto {
     email: string;
 
     @IsInt()
-    age: number;
+    year_of_birth: number;
 
     @IsString()
     @IsEnum(['male','female','unspecified'])

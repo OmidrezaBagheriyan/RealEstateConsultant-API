@@ -17,7 +17,7 @@ export class User {
     email: string;
 
     @Column({ type: 'int'})
-    age: number;
+    year_of_birth: number;
 
     @Column({ type: 'varchar'})
     password: string;
